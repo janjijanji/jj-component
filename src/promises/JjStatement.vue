@@ -1,10 +1,17 @@
 <template lang="pug">
-
   .jjc-statement(:style="backgroundStyle")
     .jjc-statement__wrapper.jjc-statement__wrapper--padded
+      .jjc-statement__head(v-if="mode === 'full'")
+        .jjc-statement__verdict {{ $getJjVerdictLabel(verdict) }}
       .jjc-statement__body(:style="fontStyle") {{ statement }}
-      .jjc-statement__full-name {{ promiseMaker.full_name }}
-
+      .jjc-statement__foot
+        .jjc-statement__avatar
+          jj-avatar(
+            v-if="mode === 'full'"
+            :src="promiseMaker.avatar_url"
+          )
+        .jjc-statement__full-name {{ promiseMaker.full_name }}
+        .jjc-statement__position(v-if="mode === 'full'") {{ promiseMaker.position }}
 </template>
 
 <script>
@@ -12,17 +19,24 @@
     name: 'jj-statement',
 
     props: {
+      // Accept `moderate` & `full`
+      mode: {
+        type: String,
+        default: 'moderate'
+      },
       statement: {
         type: String,
-        default: ''
+        required: true
       },
       verdict: {
         type: String,
-        default: ''
+        required: true
       },
       // `promiseMaker` must have a member named `full_name`
+      // if `mode` is `full` `promiseMaker` also must have a member named `position` & `avatar_url`
       promiseMaker: {
-        type: Object
+        type: Object,
+        required: true
       }
     },
 
@@ -30,7 +44,7 @@
       fontStyle () {
         let nWord = this.statement.split(' ').length
         let baseSize = 1.0
-        let delta = 0.125
+        let delta = this.mode === 'full' ? 0.375 : 0.125
         let scale = 0
 
         switch (true) {
@@ -49,6 +63,12 @@
         return {
           backgroundColor: this.$getJjVerdictColor(this.verdict, 0.1)
         }
+      }
+    },
+
+    mounted () {
+      if (this.mode === 'full') {
+        this.$el.getElementsByClassName('jjc-statement__verdict')[0].style.color = this.$getJjVerdictColor(this.verdict)
       }
     }
   }
@@ -76,8 +96,16 @@
       font-style: italic;
     }
 
+    &__avatar {
+      margin-top: 20px;
+    }
+
     &__full-name {
       margin-top: 10px;
+    }
+
+    &__position {
+      font-size: .875em;
     }
   }
 </style>

@@ -1,4 +1,5 @@
 import JjLogo from './others/JjLogo'
+import JjStatement from './promises/JjStatement'
 
 module.exports = function install (Vue) {
   if (install.installed) {
@@ -21,4 +22,5 @@ module.exports = function install (Vue) {
   Vue.prototype.$getJjVerdictColorByIndex = (index, opacity) => Vue.prototype.$getJjVerdictColor(Vue.prototype.getJjVerdictKeyByIndex(index), opacity)
 
   Vue.component(JjLogo.name, JjLogo)
+  Vue.component(JjStatement.name, JjStatement)
 }

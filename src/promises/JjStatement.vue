@@ -20,6 +20,7 @@
         type: String,
         default: ''
       },
+      // `promiseMaker` must have a member named `full_name`
       promiseMaker: {
         type: Object
       }

@@ -57,5 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
-index.js
-
+# result from npm run build
+/index.js

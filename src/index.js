@@ -1,6 +1,7 @@
 import JjLogo from './others/JjLogo'
 import JjAvatar from './promise-makers/JjAvatar'
 import JjStatement from './promises/JjStatement'
+import JjVote from './promises/JjVote'
 
 module.exports = function install (Vue) {
   if (install.installed) {
@@ -25,4 +26,5 @@ module.exports = function install (Vue) {
   Vue.component(JjLogo.name, JjLogo)
   Vue.component(JjAvatar.name, JjAvatar)
   Vue.component(JjStatement.name, JjStatement)
+  Vue.component(JjVote.name, JjVote)
 }

@@ -1,17 +1,20 @@
 <template lang="pug">
-  .jjc-statement(:style="backgroundStyle")
+  .jjc-statement(
+    :style="backgroundStyle"
+    :class="{ 'jjc-statement--full': isFull }"
+  )
     .jjc-statement__wrapper.jjc-statement__wrapper--padded
-      .jjc-statement__head(v-if="mode === 'full'")
+      .jjc-statement__head(v-if="isFull")
         .jjc-statement__verdict {{ $getJjVerdictLabel(verdict) }}
       .jjc-statement__body(:style="fontStyle") {{ statement }}
       .jjc-statement__foot
         .jjc-statement__avatar
           jj-avatar(
-            v-if="mode === 'full'"
+            v-if="isFull"
             :src="promiseMaker.avatar_url"
           )
         .jjc-statement__full-name {{ promiseMaker.full_name }}
-        .jjc-statement__position(v-if="mode === 'full'") {{ promiseMaker.position }}
+        .jjc-statement__position(v-if="isFull") {{ promiseMaker.position }}
 </template>
 
 <script>
@@ -44,7 +47,7 @@
       fontStyle () {
         let nWord = this.statement.split(' ').length
         let baseSize = 1.0
-        let delta = this.mode === 'full' ? 0.375 : 0.125
+        let delta = this.isFull ? 0.375 : 0.125
         let scale = 0
 
         switch (true) {
@@ -63,12 +66,15 @@
         return {
           backgroundColor: this.$getJjVerdictColor(this.verdict, 0.1)
         }
+      },
+      isFull () {
+        this.mode === 'full'
       }
     },
 
     mounted () {
-      if (this.mode === 'full') {
-        this.$el.getElementsByClassName('jjc-statement__verdict')[0].style.color = this.$getJjVerdictColor(this.verdict)
+      if (this.isFull) {
+        return this.$el.getElementsByClassName('jjc-statement__verdict')[0].style.color = this.$getJjVerdictColor(this.verdict)
       }
     }
   }

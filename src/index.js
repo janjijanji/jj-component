@@ -1,5 +1,6 @@
 import JjNewsItem from './news/JjNewsItem'
 import JjLogo from './others/JjLogo'
+import JjShare from './others/JjShare'
 import JjImg from './others/JjImg'
 import JjAvatar from './promise-makers/JjAvatar'
 import JjStatement from './promises/JjStatement'
@@ -27,6 +28,7 @@ module.exports = function install (Vue) {
 
   Vue.component(JjNewsItem.name, JjNewsItem)
   Vue.component(JjLogo.name, JjLogo)
+  Vue.component(JjShare.name, JjShare)
   Vue.directive(JjImg.name, JjImg)
   Vue.component(JjAvatar.name, JjAvatar)
   Vue.component(JjStatement.name, JjStatement)

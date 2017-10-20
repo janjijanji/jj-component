@@ -1,3 +1,4 @@
+import JjArticleBody from './news/JjArticleBody'
 import JjNewsItem from './news/JjNewsItem'
 import JjLogo from './others/JjLogo'
 import JjShare from './others/JjShare'
@@ -26,6 +27,7 @@ module.exports = function install (Vue) {
   Vue.prototype.$getJjVerdictLabelByIndex = index => Vue.prototype.$getJjVerdictLabel(Vue.prototype.$getJjVerdictKeyByIndex(index))
   Vue.prototype.$getJjVerdictColorByIndex = (index, opacity) => Vue.prototype.$getJjVerdictColor(Vue.prototype.getJjVerdictKeyByIndex(index), opacity)
 
+  Vue.component(JjArticleBody.name, JjArticleBody)
   Vue.component(JjNewsItem.name, JjNewsItem)
   Vue.component(JjLogo.name, JjLogo)
   Vue.component(JjShare.name, JjShare)
